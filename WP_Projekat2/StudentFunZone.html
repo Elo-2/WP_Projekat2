@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="bs">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Fun Zone</title>
+
+    <link rel="stylesheet"
+          href="izgled.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a href="index.html">
+
+        <img
+            src="slike/logo-ipi.png"
+            alt="IPI Akademija">
+
+    </a>
+
+</header>
+
+
+<!-- =========================================
+     NAVIGACIJA
+     
+     navigation.js automatski prikazuje:
+     
+     NEULOGOVAN:
+     - O kursevima
+     - Popis kurseva
+     - Raspored kurseva
+     - Student Fun Zone
+     - Login / Register
+     - Kontakt
+     
+     ULOGOVAN:
+     - View Profile
+     - Student Fun Zone
+     - Dashboard
+     - Logout
+     ========================================= -->
+
+<nav></nav>
+
+
+<!-- =========================================
+     STUDENT FUN ZONE
+     ========================================= -->
+
+<article>
+
+    <h2>Student Fun Zone</h2>
+
+    <p>
+        Dobrodošli u Student Fun Zone.
+    </p>
+
+    <p>
+        Odaberite jednu od dostupnih aktivnosti:
+    </p>
+
+
+    <!-- =========================================
+         IFRAME ZA IGRE
+         NE DIRAMO
+         ========================================= -->
+
+    <iframe
+        id="contentFrame"
+        name="contentFrame"
+        src="about:blank"
+        title="Student Fun Zone">
+    </iframe>
+
+
+</article>
+
+
+<footer>
+
+    &copy; Internacionalna poslovno-informaciona akademija Tuzla
+
+</footer>
+
+
+<!-- =========================================
+     GLAVNA NAVIGACIJA
+     ========================================= -->
+
+<script src="navigation.js"></script>
+
+
+
+
+<!-- =========================================
+     OTVARANJE ODABRANE IGRE
+     ========================================= -->
+
+<script>
+
+const params =
+    new URLSearchParams(window.location.search);
+
+
+/* =========================================
+   PROVJERA STATUSA PRIJAVE
+   ========================================= */
+
+const logged =
+    params.get("logged");
+
+
+/*
+    Ako smo došli iz ulogovane navigacije,
+    zapamti da je korisnik prijavljen.
+*/
+
+if (logged === "1") {
+
+    localStorage.setItem(
+        "oldSiteLoggedIn",
+        "true"
+    );
+
+}
+
+
+/* =========================================
+   ODABIR IGRE
+   ========================================= */
+
+const game =
+    params.get("game");
+
+
+const pages = {
+
+    bingo: "bingo.html",
+
+    kviz: "kviz/kviz.html",
+
+    whiteboard: "whiteboard/whiteboard.html",
+
+    visionboard: "visionboard/visionboard.html",
+
+    kanbanboard: "kanbanboard/kanbanboard.html"
+
+};
+
+
+/* =========================================
+   OTVORI ODABRANU IGRU
+   ========================================= */
+
+if (game && pages[game]) {
+
+    const contentFrame =
+        document.getElementById("contentFrame");
+
+    contentFrame.src =
+        pages[game];
+
+
+    if (game === "bingo") {
+
+        contentFrame.style.height =
+            "780px";
+
+    } else {
+
+        contentFrame.style.height =
+            "750px";
+
+    }
+
+}
+
+</script>
+
+
+
+
+</body>
+
+</html>

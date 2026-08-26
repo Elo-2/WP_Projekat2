@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="bs">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Login / Register</title>
+
+    <link rel="stylesheet" href="login.css">
+
+</head>
+
+
+<body>
+
+<div class="login-container">
+
+    <!-- LOGIN -->
+
+    <div id="loginSection">
+
+        <h2>Login</h2>
+
+        <form id="loginForm">
+
+            <label for="loginEmail">
+                E-mail
+            </label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                required>
+
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                required>
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p>
+
+            Nemate račun?
+
+            <a href="#" id="registerLink">
+                Register
+            </a>
+
+        </p>
+
+    </div>
+
+
+    <!-- REGISTER -->
+
+    <div id="registerSection" style="display:none;">
+
+        <h2>Register</h2>
+
+        <form id="registerForm">
+
+
+            <label for="registerName">
+                Ime
+            </label>
+
+            <input
+                type="text"
+                id="registerName"
+                required>
+
+
+            <label for="registerEmail">
+                E-mail
+            </label>
+
+            <input
+                type="email"
+                id="registerEmail"
+                required>
+
+
+            <label for="registerPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                required>
+
+
+            <label for="theme">
+                Izaberite temu
+            </label>
+
+            <select id="theme" required>
+
+                <option value="">
+                    -- Odaberite temu --
+                </option>
+
+                <option value="green">
+                    Zelena
+                </option>
+
+                <option value="blue">
+                    Plava
+                </option>
+
+                <option value="pink">
+                    Roza
+                </option>
+
+                <option value="orange">
+                    Narandžasta
+                </option>
+
+                <option value="dark">
+                    Tamna / Dark
+                </option>
+
+                <option value="cyberpunk">
+                    Cyberpunk
+                </option>
+
+            </select>
+
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+
+
+        <p>
+
+            Već imate račun?
+
+            <a href="#" id="loginBackLink">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<script src="login.js"></script>
+
+</body>
+
+</html>

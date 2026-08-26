@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bs">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt</title>
+
+    <link rel="stylesheet" href="izgled.css">
+</head>
+
+<body>
+
+<header>
+
+    <a href="index.html">
+        <img src="slike/logo-ipi.png" alt="IPI Akademija">
+    </a>
+
+</header>
+
+<nav>
+    <ul>
+
+        <li>
+            <a href="index.html">O kursevima</a>
+        </li>
+
+        <li>
+            <a href="popis.html">Popis kurseva</a>
+        </li>
+
+        <li>
+            <a href="raspored.html">Raspored kurseva</a>
+        </li>
+
+        <li class="dropdown">
+    <a href="studentfunzone.html">Student Fun Zone</a>
+
+    <ul class="submenu">
+
+        <li>
+            <a href="studentfunzone.html?game=bingo">
+                Bingo
+            </a>
+        </li>
+
+        <li>
+            <a href="studentfunzone.html?game=kviz">
+                Kviz
+            </a>
+        </li>
+
+        <li>
+            <a href="studentfunzone.html?game=whiteboard">
+                Interaktivni Whiteboard
+            </a>
+        </li>
+
+        <li>
+            <a href="studentfunzone.html?game=visionboard">
+                Visual Board
+            </a>
+        </li>
+
+        <li>
+            <a href="studentfunzone.html?game=kanbanboard">
+                Kanban Board
+            </a>
+        </li>
+
+    </ul>
+</li>
+
+        <li>
+            <a href="kontakt.html">Kontakt</a>
+        </li>
+
+    </ul>
+</nav>
+
+<article>
+
+    <h2>Kontakt</h2>
+
+    <img src="slike/srce.jpg" alt="Srce">
+
+    <p>
+        Do IPI-ja se može doći javnim gradskim prevozom ili taksijem.
+    </p>
+
+    <p>Naša adresa je:</p>
+
+    <p>
+        Sveučilišni računski centar<br>
+        Kulina bana br. 2 (Skver)<br>
+        Tuzla<br>
+        75000<br>
+        Bosna i Hercegovina<br>
+
+        <a href="mailto:info@ipi-akademija.ba">
+            info@ipi-akademija.ba
+        </a>
+    </p>
+
+    <h3>Kontakt forma</h3>
+
+    <form
+        action="mailto:info@ipi-akademija.ba"
+        method="post"
+        enctype="text/plain">
+
+        <label for="ime">Ime i prezime:</label><br>
+
+        <input
+            type="text"
+            id="ime"
+            name="ime"
+            required>
+
+        <br><br>
+
+        <label for="email">E-mail:</label><br>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            required>
+
+        <br><br>
+
+        <label for="poruka">Poruka:</label><br>
+
+        <textarea
+            id="poruka"
+            name="poruka"
+            rows="6"
+            required></textarea>
+
+        <br><br>
+
+        <button type="submit">Pošalji</button>
+
+        <button type="reset">Poništi</button>
+
+    </form>
+
+</article>
+
+<footer>
+    &copy; Internacionalna poslovno-informaciona akademija Tuzla
+</footer>
+
+<script src="navigation.js"></script>
+
+</body>
+</html>

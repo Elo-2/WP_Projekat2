@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bingo</title>
+
+    <link rel="stylesheet" href="funzone.css">
+
+    <style>
+        .bingo-container {
+            max-width: 650px;
+            margin: 0 auto;
+            
+        }
+
+        .bingo-board {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 6px;
+			width: 350px;
+			margin: 20px auto;
+		}
+		
+		.bingo-cell {
+			width: 62px;
+			height: 62px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: white;
+			border: 2px solid #c30f10;
+			border-radius: 8px;
+
+			font-size: 20px;
+			font-weight: bold;
+			cursor: pointer;
+
+			box-sizing: border-box;
+		}
+
+	.bingo-cell:hover {
+		background: #f7dcdc;
+	}	
+
+	.bingo-cell.marked {
+		background: #c30f10;
+		color: white;
+	}
+
+        .bingo-number {
+            aspect-ratio: 1;
+            background: white;
+            border: 2px solid #c30f10;
+            color: #484645;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .bingo-number:hover {
+            background: #f7dcdc;
+        }
+
+        .bingo-number.called {
+            background: #eeeeee;
+            color: #999;
+        }
+
+        .bingo-number.marked {
+            background: #c30f10;
+            color: white;
+        }
+
+        .bingo-number.free {
+            background: #c30f10;
+            color: white;
+            cursor: default;
+        }
+
+        .last-number {
+            margin: 20px auto;
+            padding: 15px;
+            max-width: 250px;
+            border: 2px solid #c30f10;
+            border-radius: 8px;
+            background: #f7dcdc;
+        }
+
+        .last-number span {
+            display: block;
+            font-size: 36px;
+            font-weight: bold;
+            color: #c30f10;
+            margin-top: 5px;
+        }
+
+        #message {
+            color: #c30f10;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        .bingo-buttons {
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="bingo-container">
+
+    <h2>Bingo</h2>
+
+    <p>
+        Izvlačite brojeve jedan po jedan i označite ih na svojoj Bingo tabli.
+    </p>
+
+    <div class="last-number">
+        Posljednji izvučeni broj:
+        <span id="lastNumber">-</span>
+    </div>
+
+    <div class="bingo-buttons">
+
+        <button id="drawBtn">
+            Izvuci broj
+        </button>
+
+        <button id="newGameBtn">
+            Nova igra
+        </button>
+
+    </div>
+
+    <p id="message"></p>
+
+    <div id="bingoBoard" class="bingo-board"></div>
+
+</div>
+
+<script>
+
+    const bingoBoard = document.getElementById("bingoBoard");
+    const drawBtn = document.getElementById("drawBtn");
+    const newGameBtn = document.getElementById("newGameBtn");
+    const lastNumber = document.getElementById("lastNumber");
+    const message = document.getElementById("message");
+
+    let boardNumbers = [];
+    let calledNumbers = [];
+    let markedNumbers = [];
+    let gameOver = false;
+
+
+    // ==========================================
+    // KREIRANJE BINGO TABELE
+    // ==========================================
+
+    function createBoard() {
+
+        bingoBoard.innerHTML = "";
+
+        boardNumbers = [];
+        markedNumbers = [];
+        gameOver = false;
+
+        message.textContent = "";
+        lastNumber.textContent = "-";
+
+        const numbers = [];
+
+        while (numbers.length < 25) {
+
+            const number = Math.floor(Math.random() * 75) + 1;
+
+            if (!numbers.includes(number)) {
+                numbers.push(number);
+            }
+        }
+
+        boardNumbers = numbers;
+
+        numbers.forEach((number, index) => {
+
+            const cell = document.createElement("button");
+
+            cell.className = "bingo-number";
+            cell.textContent = number;
+
+            cell.dataset.number = number;
+
+            cell.addEventListener("click", () => {
+
+                if (gameOver) return;
+
+                // Broj se može označiti samo ako je prethodno izvučen
+                if (!calledNumbers.includes(number)) {
+                    message.textContent =
+                        "Ovaj broj još nije izvučen!";
+                    return;
+                }
+
+                if (!markedNumbers.includes(number)) {
+
+                    markedNumbers.push(number);
+                    cell.classList.add("marked");
+
+                    checkWinner();
+                }
+
+            });
+
+            bingoBoard.appendChild(cell);
+
+        });
+
+    }
+
+
+    // ==========================================
+    // IZVLAČENJE BROJA
+    // ==========================================
+
+    function drawNumber() {
+
+        if (gameOver) return;
+
+        if (calledNumbers.length >= 75) {
+
+            message.textContent =
+                "Svi brojevi su već izvučeni.";
+
+            return;
+        }
+
+        let number;
+
+        do {
+
+            number = Math.floor(Math.random() * 75) + 1;
+
+        } while (calledNumbers.includes(number));
+
+
+        calledNumbers.push(number);
+
+        lastNumber.textContent = number;
+
+
+        // Ako se broj nalazi na tabli
+        const cell = document.querySelector(
+            `.bingo-number[data-number="${number}"]`
+        );
+
+        if (cell) {
+
+            cell.classList.add("called");
+
+            message.textContent =
+                "Broj " + number +
+                " je na vašoj tabli! Kliknite ga da ga označite.";
+
+        } else {
+
+            message.textContent =
+                "Izvučen je broj " + number + ".";
+        }
+
+    }
+
+
+    // ==========================================
+    // PROVJERA POBJEDE
+    // ==========================================
+
+    function checkWinner() {
+
+        // Redovi
+        for (let row = 0; row < 5; row++) {
+
+            const start = row * 5;
+
+            const rowNumbers = boardNumbers.slice(
+                start,
+                start + 5
+            );
+
+            if (rowNumbers.every(number =>
+                markedNumbers.includes(number)
+            )) {
+
+                win("popunili ste red!");
+
+                return;
+            }
+        }
+
+
+        // Kolone
+        for (let col = 0; col < 5; col++) {
+
+            let complete = true;
+
+            for (let row = 0; row < 5; row++) {
+
+                const number =
+                    boardNumbers[row * 5 + col];
+
+                if (!markedNumbers.includes(number)) {
+                    complete = false;
+                    break;
+                }
+            }
+
+            if (complete) {
+
+                win("popunili ste kolonu!");
+
+                return;
+            }
+        }
+
+
+        // Glavna dijagonala
+        let diagonal1 = true;
+
+        for (let i = 0; i < 5; i++) {
+
+            const number = boardNumbers[i * 5 + i];
+
+            if (!markedNumbers.includes(number)) {
+                diagonal1 = false;
+                break;
+            }
+        }
+
+        if (diagonal1) {
+
+            win("popunili ste dijagonalu!");
+
+            return;
+        }
+
+
+        // Druga dijagonala
+        let diagonal2 = true;
+
+        for (let i = 0; i < 5; i++) {
+
+            const number =
+                boardNumbers[i * 5 + (4 - i)];
+
+            if (!markedNumbers.includes(number)) {
+                diagonal2 = false;
+                break;
+            }
+        }
+
+        if (diagonal2) {
+
+            win("popunili ste dijagonalu!");
+
+            return;
+        }
+
+    }
+
+
+    // ==========================================
+    // POBJEDA
+    // ==========================================
+
+    function win(type) {
+
+        gameOver = true;
+
+        message.textContent =
+            "🎉 BINGO! " + type;
+
+        drawBtn.disabled = true;
+    }
+
+
+    // ==========================================
+    // NOVA IGRA
+    // ==========================================
+
+    function newGame() {
+
+        calledNumbers = [];
+
+        drawBtn.disabled = false;
+
+        createBoard();
+
+    }
+
+
+    drawBtn.addEventListener("click", drawNumber);
+
+    newGameBtn.addEventListener("click", newGame);
+
+
+    // Pokreni prvu igru
+    newGame();
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

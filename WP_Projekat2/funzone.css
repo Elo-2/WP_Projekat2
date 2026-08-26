@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 30px;
+    font-family: Verdana, Arial, sans-serif;
+    color: #484645;
+    background: #ffffff;
+    text-align: center;
+}
+
+h2 {
+    color: #c30f10;
+    margin-top: 10px;
+    font-size: 26px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+button {
+    background-color: #c30f10;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a50d0e;
+}
+
+/* =========================================
+   KORISNIČKE TEME
+   Primjenjuju se samo kada je korisnik prijavljen
+   ========================================= */
+
+body.green {
+    background-color: #27e068;
+    color: #000000;
+}
+
+body.blue {
+    background-color: #0095ff;
+    color: #000000;
+}
+
+body.pink {
+    background-color: #ff6599;
+    color: #000000;
+}
+
+body.orange {
+    background-color: #e65100;
+    color: #000000;
+}
+
+body.dark {
+    background-color: #222;
+    color: white;
+}
+
+body.cyberpunk {
+    background-color: #12002b;
+    color: #00ffcc;
+}
+
+html,
+body {
+    min-height: 100%;
+    height: auto;
+    overflow: hidden;
+}
