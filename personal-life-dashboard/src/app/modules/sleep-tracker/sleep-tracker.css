@@ -1,0 +1,58 @@
+.sleep-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+}
+
+.sleep-container h1 {
+    margin-bottom: 10px;
+}
+
+.sleep-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sleep-container input,
+.sleep-container select {
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.sleep-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sleep-list {
+    margin-top: 30px;
+}
+
+.sleep-record {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.sleep-record p {
+    margin: 5px 0;
+}
+
+.delete-button {
+    background-color: #c30f10;
+    color: white;
+}
+
+.delete-button:hover {
+    opacity: 0.85;
+}

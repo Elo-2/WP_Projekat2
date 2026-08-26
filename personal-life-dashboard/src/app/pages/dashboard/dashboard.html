@@ -1,0 +1,73 @@
+<div class="dashboard-container">
+
+    <div class="dashboard-header">
+
+        <h1>Personal Life Dashboard</h1>
+
+        <p>
+            Dobrodošli u vaš lični dashboard.
+        </p>
+
+        <p>
+            Odaberite module koje želite koristiti.
+        </p>
+
+    </div>
+
+
+    <div class="statistics-link">
+
+        <a routerLink="/statistics">
+            📊 Statistics
+        </a>
+
+    </div>
+
+
+    <div class="module-grid">
+
+        @for (module of modules; track module.name) {
+
+            <div
+                class="module-card"
+                [class.disabled]="!module.enabled"
+            >
+
+                <div
+                    class="module-content"
+                    [routerLink]="module.enabled ? module.route : null"
+                >
+
+                    <h2>
+                        {{ module.name }}
+                    </h2>
+
+                    <p>
+                        {{ module.description }}
+                    </p>
+
+                </div>
+
+
+                <div class="module-footer">
+
+                    <span>
+                        {{ module.enabled ? 'Uključeno' : 'Isključeno' }}
+                    </span>
+
+                    <button
+                        type="button"
+                        (click)="toggleModule(module)"
+                    >
+                        {{ module.enabled ? 'Isključi' : 'Uključi' }}
+                    </button>
+
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

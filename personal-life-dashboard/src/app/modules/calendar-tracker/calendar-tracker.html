@@ -1,0 +1,166 @@
+<div class="calendar-container">
+
+    <h1>Calendar Tracker</h1>
+
+    <p>
+        Organizujte događaje, obaveze i važne datume.
+    </p>
+
+    <form
+        (submit)="addEvent(
+            title.value,
+            date.value,
+            time.value,
+            type.value,
+            note.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="title">
+            Naziv događaja
+        </label>
+
+        <input
+            #title
+            type="text"
+            id="title"
+            placeholder="Npr. Ispit iz Web programiranja"
+            required
+        >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="time">
+            Vrijeme
+        </label>
+
+        <input
+            #time
+            type="time"
+            id="time"
+        >
+
+        <label for="type">
+            Tip događaja
+        </label>
+
+        <select
+            #type
+            id="type"
+            required
+        >
+
+            <option value="">
+                Odaberite tip
+            </option>
+
+            <option value="Fakultet">
+                Fakultet
+            </option>
+
+            <option value="Posao">
+                Posao
+            </option>
+
+            <option value="Lično">
+                Lično
+            </option>
+
+            <option value="Sastanak">
+                Sastanak
+            </option>
+
+            <option value="Ostalo">
+                Ostalo
+            </option>
+
+        </select>
+
+        <label for="note">
+            Napomena
+        </label>
+
+        <textarea
+            #note
+            id="note"
+            rows="4"
+            placeholder="Dodatne informacije..."
+        ></textarea>
+
+        <button type="submit">
+            Dodaj događaj
+        </button>
+
+    </form>
+
+    <div class="calendar-list">
+
+        <h2>Moji događaji</h2>
+
+        @for (event of events; track $index) {
+
+            <div class="calendar-record">
+
+                <div>
+
+                    <h3>
+                        {{ event.title }}
+                    </h3>
+
+                    <p>
+                        Datum:
+                        <strong>
+                            {{ event.date }}
+                        </strong>
+                    </p>
+
+                    @if (event.time) {
+
+                        <p>
+                            Vrijeme:
+                            {{ event.time }}
+                        </p>
+
+                    }
+
+                    <p>
+                        Tip:
+                        <strong>
+                            {{ event.type }}
+                        </strong>
+                    </p>
+
+                    @if (event.note) {
+
+                        <p>
+                            {{ event.note }}
+                        </p>
+
+                    }
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteEvent($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

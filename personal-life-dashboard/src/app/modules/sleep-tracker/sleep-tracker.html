@@ -1,0 +1,124 @@
+<div class="sleep-container">
+
+    <h1>Sleep Tracker</h1>
+
+    <p>
+        Pratite svoje navike spavanja.
+    </p>
+
+    <form
+        (submit)="addRecord(
+            date.value,
+            bedtime.value,
+            wakeTime.value,
+            quality.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="bedtime">
+            Vrijeme odlaska na spavanje
+        </label>
+
+        <input
+            #bedtime
+            type="time"
+            id="bedtime"
+            required
+        >
+
+        <label for="wakeTime">
+            Vrijeme buđenja
+        </label>
+
+        <input
+            #wakeTime
+            type="time"
+            id="wakeTime"
+            required
+        >
+
+        <label for="quality">
+            Kvalitet sna
+        </label>
+
+        <select
+            #quality
+            id="quality"
+            required
+        >
+
+            <option value="">Odaberite</option>
+            <option value="1">1 - Loš</option>
+            <option value="2">2 - Slab</option>
+            <option value="3">3 - Dobar</option>
+            <option value="4">4 - Vrlo dobar</option>
+            <option value="5">5 - Odličan</option>
+
+        </select>
+
+        <button type="submit">
+            Dodaj zapis
+        </button>
+
+    </form>
+
+    <div class="sleep-list">
+
+        <h2>Moji zapisi</h2>
+
+        @for (record of records; track $index) {
+
+            <div class="sleep-record">
+
+                <div>
+
+                    <strong>
+                        {{ record.date }}
+                    </strong>
+
+                    <p>
+                        {{ record.bedtime }}
+                        -
+                        {{ record.wakeTime }}
+                    </p>
+
+                    <p>
+                        Spavanje:
+                        <strong>
+                            {{ record.hours }} sati
+                        </strong>
+                    </p>
+
+                    <p>
+                        Kvalitet:
+                        {{ record.quality }}/5
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteRecord($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,161 @@
+<div class="finance-container">
+
+    <h1>Finance Mini Tracker</h1>
+
+    <p>
+        Pratite svoje prihode, troškove i stanje računa.
+    </p>
+
+    <form
+        (submit)="addRecord(
+            description.value,
+            date.value,
+            type.value,
+            amount.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="description">
+            Opis
+        </label>
+
+        <input
+            #description
+            type="text"
+            id="description"
+            placeholder="Npr. Plata, hrana, gorivo..."
+            required
+        >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="type">
+            Tip
+        </label>
+
+        <select
+            #type
+            id="type"
+            required
+        >
+
+            <option value="">
+                Odaberite tip
+            </option>
+
+            <option value="Prihod">
+                Prihod
+            </option>
+
+            <option value="Trošak">
+                Trošak
+            </option>
+
+        </select>
+
+        <label for="amount">
+            Iznos (KM)
+        </label>
+
+        <input
+            #amount
+            type="number"
+            id="amount"
+            min="0"
+            step="0.01"
+            placeholder="Npr. 100"
+            required
+        >
+
+        <button type="submit">
+            Dodaj transakciju
+        </button>
+
+    </form>
+
+    <div class="finance-summary">
+
+        <div class="summary-card">
+            <h2>Prihodi</h2>
+
+            <strong>
+                {{ getIncome().toFixed(2) }} KM
+            </strong>
+        </div>
+
+        <div class="summary-card">
+            <h2>Troškovi</h2>
+
+            <strong>
+                {{ getExpenses().toFixed(2) }} KM
+            </strong>
+        </div>
+
+        <div class="summary-card">
+            <h2>Stanje</h2>
+
+            <strong>
+                {{ getBalance().toFixed(2) }} KM
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="finance-list">
+
+        <h2>Transakcije</h2>
+
+        @for (record of records; track $index) {
+
+            <div class="finance-record">
+
+                <div>
+
+                    <h3>
+                        {{ record.description }}
+                    </h3>
+
+                    <p>
+                        Datum: {{ record.date }}
+                    </p>
+
+                    <p>
+                        Tip:
+                        <strong>
+                            {{ record.type }}
+                        </strong>
+                    </p>
+
+                    <p>
+                        Iznos:
+                        <strong>
+                            {{ record.amount.toFixed(2) }} KM
+                        </strong>
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteRecord($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

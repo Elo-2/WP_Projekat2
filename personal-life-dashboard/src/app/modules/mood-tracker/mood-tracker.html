@@ -1,0 +1,155 @@
+<div class="mood-container">
+
+    <h1>Mood Tracker</h1>
+
+    <p>
+        Pratite svoje raspoloženje iz dana u dan.
+    </p>
+
+    <form
+        (submit)="addMood(
+            date.value,
+            mood.value,
+            score.value,
+            note.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="mood">
+            Raspoloženje
+        </label>
+
+        <select
+            #mood
+            id="mood"
+            required
+        >
+
+            <option value="">
+                Odaberite raspoloženje
+            </option>
+
+            <option value="Sretno">
+                😊 Sretno
+            </option>
+
+            <option value="Dobro">
+                🙂 Dobro
+            </option>
+
+            <option value="Neutralno">
+                😐 Neutralno
+            </option>
+
+            <option value="Loše">
+                🙁 Loše
+            </option>
+
+            <option value="Tužno">
+                😢 Tužno
+            </option>
+
+        </select>
+
+        <label for="score">
+            Ocjena raspoloženja (1-10)
+        </label>
+
+        <input
+            #score
+            type="number"
+            id="score"
+            min="1"
+            max="10"
+            placeholder="Npr. 8"
+            required
+        >
+
+        <label for="note">
+            Napomena
+        </label>
+
+        <textarea
+            #note
+            id="note"
+            rows="4"
+            placeholder="Kako ste se osjećali danas?"
+        ></textarea>
+
+        <button type="submit">
+            Dodaj raspoloženje
+        </button>
+
+    </form>
+
+    <div class="mood-summary">
+
+        <h2>Prosječno raspoloženje</h2>
+
+        <strong>
+            {{ getAverageMood() }} / 10
+        </strong>
+
+    </div>
+
+    <div class="mood-list">
+
+        <h2>Moja raspoloženja</h2>
+
+        @for (record of moods; track $index) {
+
+            <div class="mood-record">
+
+                <div>
+
+                    <h3>
+                        {{ record.mood }}
+                    </h3>
+
+                    <p>
+                        Datum: {{ record.date }}
+                    </p>
+
+                    <p>
+                        Ocjena:
+                        <strong>
+                            {{ record.score }} / 10
+                        </strong>
+                    </p>
+
+                    @if (record.note) {
+
+                        <p>
+                            {{ record.note }}
+                        </p>
+
+                    }
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteMood($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

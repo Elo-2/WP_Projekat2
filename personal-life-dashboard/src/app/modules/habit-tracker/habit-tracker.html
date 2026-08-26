@@ -1,0 +1,77 @@
+<div class="habit-container">
+
+    <h1>Habit Tracker</h1>
+
+    <p>
+        Dodajte i pratite svoje dnevne navike.
+    </p>
+
+    <form
+        (submit)="addHabit(habit.value); habit.value = ''; $event.preventDefault()"
+    >
+
+        <input
+            #habit
+            type="text"
+            placeholder="Unesite novu naviku"
+        >
+
+        <button type="submit">
+            Dodaj
+        </button>
+
+    </form>
+
+    <div class="progress">
+
+        <h2>Napredak</h2>
+
+        <p>
+            Završeno:
+            <strong>
+                {{ getCompletionPercentage() }}%
+            </strong>
+        </p>
+
+    </div>
+
+    <div class="habit-list">
+
+        <h2>Moje navike</h2>
+
+        @for (habit of habits; track $index) {
+
+            <div
+                class="habit-item"
+                [class.completed]="habit.completed"
+            >
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        [checked]="habit.completed"
+                        (change)="toggleHabit($index)"
+                    >
+
+                    <span>
+                        {{ habit.name }}
+                    </span>
+
+                </label>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteHabit($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

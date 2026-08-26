@@ -1,0 +1,72 @@
+.mood-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+}
+
+.mood-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mood-container input,
+.mood-container select,
+.mood-container textarea {
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.mood-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.mood-summary {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+
+.mood-summary strong {
+    font-size: 24px;
+}
+
+.mood-list {
+    margin-top: 30px;
+}
+
+.mood-record {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.mood-record h3 {
+    margin-top: 0;
+}
+
+.mood-record p {
+    margin: 5px 0;
+}
+
+.delete-button {
+    background-color: #c30f10;
+    color: white;
+}
+
+.delete-button:hover {
+    opacity: 0.85;
+}

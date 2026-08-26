@@ -1,0 +1,129 @@
+<div class="study-container">
+
+    <h1>Study Planner</h1>
+
+    <p>
+        Planirajte i pratite vrijeme provedeno u učenju.
+    </p>
+
+    <form
+        (submit)="addStudy(
+            subject.value,
+            date.value,
+            hours.value,
+            note.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="subject">
+            Predmet
+        </label>
+
+        <input
+            #subject
+            type="text"
+            id="subject"
+            placeholder="Npr. Web programiranje"
+            required
+        >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="hours">
+            Broj sati
+        </label>
+
+        <input
+            #hours
+            type="number"
+            id="hours"
+            min="0.5"
+            step="0.5"
+            placeholder="Npr. 2"
+            required
+        >
+
+        <label for="note">
+            Napomena
+        </label>
+
+        <textarea
+            #note
+            id="note"
+            placeholder="Šta ste učili?"
+            rows="4"
+        ></textarea>
+
+        <button type="submit">
+            Dodaj učenje
+        </button>
+
+    </form>
+
+    <div class="study-summary">
+
+        <h2>Ukupno vrijeme učenja</h2>
+
+        <strong>
+            {{ getTotalHours() }} sati
+        </strong>
+
+    </div>
+
+    <div class="study-list">
+
+        <h2>Moji zapisi</h2>
+
+        @for (record of records; track $index) {
+
+            <div class="study-record">
+
+                <div>
+
+                    <h3>
+                        {{ record.subject }}
+                    </h3>
+
+                    <p>
+                        Datum: {{ record.date }}
+                    </p>
+
+                    <p>
+                        Vrijeme:
+                        <strong>
+                            {{ record.hours }} sati
+                        </strong>
+                    </p>
+
+                    @if (record.note) {
+                        <p>
+                            {{ record.note }}
+                        </p>
+                    }
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteStudy($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

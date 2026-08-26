@@ -1,0 +1,60 @@
+.gratitude-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+}
+
+.gratitude-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gratitude-container input,
+.gratitude-container textarea {
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.gratitude-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.gratitude-list {
+    margin-top: 30px;
+}
+
+.gratitude-record {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.gratitude-record h3 {
+    margin-top: 0;
+}
+
+.gratitude-record p {
+    margin: 5px 0;
+}
+
+.delete-button {
+    background-color: #c30f10;
+    color: white;
+}
+
+.delete-button:hover {
+    opacity: 0.85;
+}

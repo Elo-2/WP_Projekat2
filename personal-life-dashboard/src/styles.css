@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body.green {
+    background-color: #27e068;
+    color: #000000;
+}
+
+body.blue {
+    background-color: #0095ff;
+    color: #000000;
+}
+
+body.pink {
+    background-color: #ff6599;
+    color: #000000;
+}
+
+body.orange {
+    background-color: #e65100;
+    color: #000000;
+}
+
+body.dark {
+    background-color: #222;
+    color: white;
+}
+
+body.cyberpunk {
+    background-color: #12002b;
+    color: #00ffcc;
+}
+
+body.green {
+    --theme-color: #27e068;
+}
+
+body.blue {
+    --theme-color: #0095ff;
+}
+
+body.pink {
+    --theme-color: #ff6599;
+}
+
+body.orange {
+    --theme-color: #e65100;
+}
+
+body.dark {
+    --theme-color: #888888;
+}
+
+body.cyberpunk {
+    --theme-color: #00ffcc;
+}

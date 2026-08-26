@@ -1,0 +1,111 @@
+<div class="reflection-container">
+
+    <h1>Daily Reflection</h1>
+
+    <p>
+        Zapišite kako je prošao vaš dan i ocijenite ga.
+    </p>
+
+    <form
+        (submit)="addReflection(
+            date.value,
+            rating.value,
+            text.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="rating">
+            Ocjena dana (1-10)
+        </label>
+
+        <input
+            #rating
+            type="number"
+            id="rating"
+            min="1"
+            max="10"
+            placeholder="Npr. 8"
+            required
+        >
+
+        <label for="text">
+            Kako je prošao vaš dan?
+        </label>
+
+        <textarea
+            #text
+            id="text"
+            rows="6"
+            placeholder="Napišite kratku refleksiju o svom danu..."
+            required
+        ></textarea>
+
+        <button type="submit">
+            Dodaj refleksiju
+        </button>
+
+    </form>
+
+    <div class="reflection-summary">
+
+        <h2>Prosječna ocjena dana</h2>
+
+        <strong>
+            {{ getAverageRating() }} / 10
+        </strong>
+
+    </div>
+
+    <div class="reflection-list">
+
+        <h2>Moje refleksije</h2>
+
+        @for (reflection of reflections; track $index) {
+
+            <div class="reflection-record">
+
+                <div>
+
+                    <h3>
+                        {{ reflection.date }}
+                    </h3>
+
+                    <p>
+                        Ocjena:
+                        <strong>
+                            {{ reflection.rating }} / 10
+                        </strong>
+                    </p>
+
+                    <p>
+                        {{ reflection.text }}
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteReflection($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,107 @@
+<div class="water-container">
+
+    <h1>Water Intake</h1>
+
+    <p>
+        Pratite koliko vode pijete tokom dana.
+    </p>
+
+    <form
+        (submit)="addWater(
+            date.value,
+            amount.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="amount">
+            Količina vode (ml)
+        </label>
+
+        <input
+            #amount
+            type="number"
+            id="amount"
+            min="1"
+            placeholder="Npr. 500"
+            required
+        >
+
+        <button type="submit">
+            Dodaj vodu
+        </button>
+
+    </form>
+
+    <div class="water-summary">
+
+        <div class="summary-card">
+
+            <h2>Ukupno</h2>
+
+            <strong>
+                {{ getTotalWater() }} ml
+            </strong>
+
+        </div>
+
+        <div class="summary-card">
+
+            <h2>Prosječno po zapisu</h2>
+
+            <strong>
+                {{ getAverageWater() }} ml
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="water-list">
+
+        <h2>Moji zapisi</h2>
+
+        @for (record of records; track $index) {
+
+            <div class="water-record">
+
+                <div>
+
+                    <h3>
+                        {{ record.date }}
+                    </h3>
+
+                    <p>
+                        Popijeno:
+                        <strong>
+                            {{ record.amount }} ml
+                        </strong>
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteWater($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

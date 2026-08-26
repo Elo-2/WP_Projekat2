@@ -1,0 +1,49 @@
+<div class="login-container">
+
+    <h1>Login</h1>
+
+    <form
+        (submit)="login(
+            email.value,
+            password.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="email">
+            E-mail
+        </label>
+
+        <input
+            #email
+            type="email"
+            id="email"
+            placeholder="Unesite e-mail"
+            required
+        >
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            #password
+            type="password"
+            id="password"
+            placeholder="Unesite password"
+            required
+        >
+
+        <button type="submit">
+            Prijava
+        </button>
+
+    </form>
+
+    <p>
+        Nemate račun?
+        <a routerLink="/register">
+            Registrujte se
+        </a>
+    </p>
+
+</div>

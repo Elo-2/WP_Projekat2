@@ -1,0 +1,66 @@
+<div class="register-container">
+
+    <h1>Registracija</h1>
+
+    <form
+        (submit)="register(
+            name.value,
+            email.value,
+            password.value,
+            theme.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="name">Ime</label>
+
+        <input
+            #name
+            type="text"
+            id="name"
+            placeholder="Unesite ime">
+
+        <label for="email">E-mail</label>
+
+        <input
+            #email
+            type="email"
+            id="email"
+            placeholder="Unesite e-mail">
+
+        <label for="password">Password</label>
+
+        <input
+            #password
+            type="password"
+            id="password"
+            placeholder="Unesite password">
+
+        <label for="theme">Tema</label>
+
+        <select
+            #theme
+            id="theme">
+
+            <option value="green">Zelena</option>
+            <option value="blue">Plava</option>
+            <option value="pink">Roza</option>
+            <option value="orange">Narandžasta</option>
+            <option value="dark">Tamna</option>
+            <option value="cyberpunk">Cyberpunk</option>
+
+        </select>
+
+        <button type="submit">
+            Registracija
+        </button>
+
+    </form>
+
+    <p>
+        Već imate račun?
+        <a routerLink="/login">
+            Prijavite se
+        </a>
+    </p>
+
+</div>

@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body.green {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+}
+
+body.blue {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+body.pink {
+    background-color: #fce4ec;
+    color: #880e4f;
+}
+
+body.orange {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+body.dark {
+    background-color: #222;
+    color: white;
+}
+
+body.cyberpunk {
+    background-color: #12002b;
+    color: #00ffcc;
+}
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--theme-color, #27e068);
+    color: #000000;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.back-button:hover {
+    opacity: 0.85;
+}

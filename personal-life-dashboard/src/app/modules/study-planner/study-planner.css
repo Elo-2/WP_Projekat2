@@ -1,0 +1,70 @@
+.study-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+}
+
+.study-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.study-container input,
+.study-container textarea {
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.study-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.study-summary {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+
+.study-summary strong {
+    font-size: 24px;
+}
+
+.study-list {
+    margin-top: 30px;
+}
+
+.study-record {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.study-record h3 {
+    margin-top: 0;
+}
+
+.study-record p {
+    margin: 5px 0;
+}
+
+.delete-button {
+    background-color: #c30f10;
+    color: white;
+}
+
+.delete-button:hover {
+    opacity: 0.85;
+}

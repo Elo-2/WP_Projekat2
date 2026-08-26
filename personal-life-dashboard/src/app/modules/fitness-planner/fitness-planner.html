@@ -1,0 +1,159 @@
+<div class="fitness-container">
+
+    <h1>Fitness Planner</h1>
+
+    <p>
+        Planirajte i pratite svoje fizičke aktivnosti.
+    </p>
+
+    <form
+        (submit)="addActivity(
+            activity.value,
+            date.value,
+            duration.value,
+            intensity.value,
+            note.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="activity">
+            Aktivnost
+        </label>
+
+        <select
+            #activity
+            id="activity"
+            required
+        >
+
+            <option value="">Odaberite aktivnost</option>
+            <option value="Trčanje">Trčanje</option>
+            <option value="Hodanje">Hodanje</option>
+            <option value="Teretana">Teretana</option>
+            <option value="Biciklizam">Biciklizam</option>
+            <option value="Yoga">Yoga</option>
+            <option value="Ostalo">Ostalo</option>
+
+        </select>
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="duration">
+            Trajanje u minutama
+        </label>
+
+        <input
+            #duration
+            type="number"
+            id="duration"
+            min="1"
+            placeholder="Npr. 45"
+            required
+        >
+
+        <label for="intensity">
+            Intenzitet
+        </label>
+
+        <select
+            #intensity
+            id="intensity"
+            required
+        >
+
+            <option value="">Odaberite intenzitet</option>
+            <option value="Nizak">Nizak</option>
+            <option value="Srednji">Srednji</option>
+            <option value="Visok">Visok</option>
+
+        </select>
+
+        <label for="note">
+            Napomena
+        </label>
+
+        <textarea
+            #note
+            id="note"
+            rows="4"
+            placeholder="Dodatna napomena..."
+        ></textarea>
+
+        <button type="submit">
+            Dodaj aktivnost
+        </button>
+
+    </form>
+
+    <div class="fitness-summary">
+
+        <h2>Ukupno vrijeme aktivnosti</h2>
+
+        <strong>
+            {{ getTotalMinutes() }} minuta
+        </strong>
+
+    </div>
+
+    <div class="fitness-list">
+
+        <h2>Moje aktivnosti</h2>
+
+        @for (record of records; track $index) {
+
+            <div class="fitness-record">
+
+                <div>
+
+                    <h3>
+                        {{ record.activity }}
+                    </h3>
+
+                    <p>
+                        Datum: {{ record.date }}
+                    </p>
+
+                    <p>
+                        Trajanje:
+                        <strong>
+                            {{ record.duration }} minuta
+                        </strong>
+                    </p>
+
+                    <p>
+                        Intenzitet:
+                        {{ record.intensity }}
+                    </p>
+
+                    @if (record.note) {
+                        <p>
+                            {{ record.note }}
+                        </p>
+                    }
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteActivity($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

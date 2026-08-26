@@ -1,0 +1,16 @@
+@if (
+    router.url !== '/login' &&
+    router.url !== '/register' &&
+    router.url !== '/dashboard'
+) {
+
+    <button
+        class="back-button"
+        (click)="goBackToDashboard()"
+    >
+        ← Dashboard
+    </button>
+
+}
+
+<router-outlet></router-outlet>

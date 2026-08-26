@@ -1,0 +1,150 @@
+<div class="task-container">
+
+    <h1>Task / Project Planner</h1>
+
+    <p>
+        Organizujte svoje zadatke i projekte.
+    </p>
+
+    <form
+        (submit)="addTask(
+            title.value,
+            date.value,
+            priority.value,
+            note.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="title">
+            Naziv zadatka
+        </label>
+
+        <input
+            #title
+            type="text"
+            id="title"
+            placeholder="Npr. Završiti projekat"
+            required
+        >
+
+        <label for="date">
+            Rok
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="priority">
+            Prioritet
+        </label>
+
+        <select
+            #priority
+            id="priority"
+            required
+        >
+
+            <option value="">Odaberite prioritet</option>
+            <option value="Nizak">Nizak</option>
+            <option value="Srednji">Srednji</option>
+            <option value="Visok">Visok</option>
+
+        </select>
+
+        <label for="note">
+            Napomena
+        </label>
+
+        <textarea
+            #note
+            id="note"
+            rows="4"
+            placeholder="Dodatne informacije..."
+        ></textarea>
+
+        <button type="submit">
+            Dodaj zadatak
+        </button>
+
+    </form>
+
+    <div class="task-summary">
+
+        <h2>Završeni zadaci</h2>
+
+        <strong>
+            {{ getCompletedTasks() }} / {{ tasks.length }}
+        </strong>
+
+    </div>
+
+    <div class="task-list">
+
+        <h2>Moji zadaci</h2>
+
+        @for (task of tasks; track $index) {
+
+            <div class="task-record">
+
+                <div>
+
+                    <h3>
+                        {{ task.title }}
+                    </h3>
+
+                    <p>
+                        Rok: {{ task.date }}
+                    </p>
+
+                    <p>
+                        Prioritet:
+                        <strong>
+                            {{ task.priority }}
+                        </strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        <strong>
+                            {{ task.status }}
+                        </strong>
+                    </p>
+
+                    @if (task.note) {
+                        <p>
+                            {{ task.note }}
+                        </p>
+                    }
+
+                </div>
+
+                <div class="task-buttons">
+
+                    <button
+                        type="button"
+                        (click)="changeStatus($index)"
+                    >
+                        Promijeni status
+                    </button>
+
+                    <button
+                        type="button"
+                        class="delete-button"
+                        (click)="deleteTask($index)"
+                    >
+                        Obriši
+                    </button>
+
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

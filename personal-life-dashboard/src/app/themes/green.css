@@ -1,0 +1,18 @@
+.theme-green {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+}
+
+.theme-green .dashboard {
+    background-color: #ffffff;
+}
+
+.theme-green .module-card {
+    border: 2px solid #4caf50;
+    background-color: #f1f8e9;
+}
+
+.theme-green button {
+    background-color: #4caf50;
+    color: white;
+}

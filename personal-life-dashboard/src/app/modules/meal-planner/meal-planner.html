@@ -1,0 +1,173 @@
+<div class="meal-container">
+
+    <h1>Meal Planner</h1>
+
+    <p>
+        Planirajte i pratite svoje obroke.
+    </p>
+
+    <form
+        (submit)="addMeal(
+            meal.value,
+            date.value,
+            type.value,
+            calories.value,
+            note.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="meal">
+            Obrok
+        </label>
+
+        <input
+            #meal
+            type="text"
+            id="meal"
+            placeholder="Npr. Piletina i riža"
+            required
+        >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="type">
+            Tip obroka
+        </label>
+
+        <select
+            #type
+            id="type"
+            required
+        >
+
+            <option value="">
+                Odaberite tip obroka
+            </option>
+
+            <option value="Doručak">
+                Doručak
+            </option>
+
+            <option value="Ručak">
+                Ručak
+            </option>
+
+            <option value="Večera">
+                Večera
+            </option>
+
+            <option value="Užina">
+                Užina
+            </option>
+
+        </select>
+
+        <label for="calories">
+            Kalorije
+        </label>
+
+        <input
+            #calories
+            type="number"
+            id="calories"
+            min="0"
+            placeholder="Npr. 500"
+        >
+
+        <label for="note">
+            Napomena
+        </label>
+
+        <textarea
+            #note
+            id="note"
+            rows="4"
+            placeholder="Dodatna napomena..."
+        ></textarea>
+
+        <button type="submit">
+            Dodaj obrok
+        </button>
+
+    </form>
+
+    <div class="meal-summary">
+
+        <h2>Ukupno kalorija</h2>
+
+        <strong>
+            {{ getTotalCalories() }} kcal
+        </strong>
+
+    </div>
+
+    <div class="meal-list">
+
+        <h2>Moji obroci</h2>
+
+        @for (record of meals; track $index) {
+
+            <div class="meal-record">
+
+                <div>
+
+                    <h3>
+                        {{ record.meal }}
+                    </h3>
+
+                    <p>
+                        Datum: {{ record.date }}
+                    </p>
+
+                    <p>
+                        Tip:
+                        <strong>
+                            {{ record.type }}
+                        </strong>
+                    </p>
+
+                    @if (record.calories > 0) {
+
+                        <p>
+                            Kalorije:
+                            <strong>
+                                {{ record.calories }} kcal
+                            </strong>
+                        </p>
+
+                    }
+
+                    @if (record.note) {
+
+                        <p>
+                            {{ record.note }}
+                        </p>
+
+                    }
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteMeal($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

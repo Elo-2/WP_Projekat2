@@ -1,0 +1,217 @@
+.dashboard-container {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.dashboard-header {
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+.dashboard-header h1 {
+    margin-bottom: 8px;
+
+    font-size: 32px;
+}
+
+.dashboard-header p {
+    margin: 5px 0;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   STATISTICS LINK
+   ========================================= */
+
+.statistics-link {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.statistics-link a {
+    display: inline-block;
+
+    padding: 12px 24px;
+
+    background-color: #27e068;
+
+    color: #000000;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.statistics-link a:hover {
+    opacity: 0.85;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   MODULE GRID
+   ========================================= */
+
+.module-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   MODULE CARD
+   ========================================= */
+
+.module-card {
+    background-color: white;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    border: 1px solid #ddd;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.module-card.disabled {
+    opacity: 0.55;
+}
+
+
+/* =========================================
+   MODULE CONTENT
+   ========================================= */
+
+.module-content {
+    cursor: pointer;
+}
+
+.module-card h2 {
+    margin-top: 0;
+
+    font-size: 20px;
+}
+
+.module-card p {
+    color: #555;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MODULE FOOTER
+   ========================================= */
+
+.module-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #ddd;
+}
+
+.module-footer span {
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.module-footer button {
+    border: none;
+
+    padding: 8px 14px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    background-color: #27e068;
+
+    color: #000;
+
+    font-weight: bold;
+}
+
+.module-footer button:hover {
+    opacity: 0.85;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .module-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 27px;
+    }
+
+    .module-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .module-footer {
+        gap: 10px;
+    }
+
+}

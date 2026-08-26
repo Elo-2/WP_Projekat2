@@ -1,0 +1,79 @@
+<div class="gratitude-container">
+
+    <h1>Gratitude Journal</h1>
+
+    <p>
+        Zapišite stvari zbog kojih ste danas zahvalni.
+    </p>
+
+    <form
+        (submit)="addEntry(
+            date.value,
+            text.value
+        ); $event.preventDefault()"
+    >
+
+        <label for="date">
+            Datum
+        </label>
+
+        <input
+            #date
+            type="date"
+            id="date"
+            required
+        >
+
+        <label for="text">
+            Na čemu ste zahvalni?
+        </label>
+
+        <textarea
+            #text
+            id="text"
+            rows="5"
+            placeholder="Danas sam zahvalan/zahvalna zbog..."
+            required
+        ></textarea>
+
+        <button type="submit">
+            Dodaj zapis
+        </button>
+
+    </form>
+
+    <div class="gratitude-list">
+
+        <h2>Moji zapisi</h2>
+
+        @for (entry of entries; track $index) {
+
+            <div class="gratitude-record">
+
+                <div>
+
+                    <h3>
+                        {{ entry.date }}
+                    </h3>
+
+                    <p>
+                        {{ entry.text }}
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="delete-button"
+                    (click)="deleteEntry($index)"
+                >
+                    Obriši
+                </button>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,706 @@
+<div class="statistics-container">
+
+    <div class="statistics-header">
+
+        <h1>Statistics</h1>
+
+        <p>
+            Pregled vaših podataka, napretka i produktivnosti.
+        </p>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filter-card">
+
+        <div class="filter-group">
+
+            <label for="period">
+                Period:
+            </label>
+
+            <select
+                id="period"
+                [(ngModel)]="selectedPeriod"
+                (ngModelChange)="onFilterChange()">
+
+                <option value="day">
+                    Dan
+                </option>
+
+                <option value="week">
+                    Sedmica
+                </option>
+
+                <option value="month">
+                    Mjesec
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="filter-group">
+
+            <label for="selectedDate">
+                Datum:
+            </label>
+
+            <input
+                id="selectedDate"
+                type="date"
+                [(ngModel)]="selectedDate"
+                (ngModelChange)="onFilterChange()">
+
+        </div>
+
+    </div>
+
+
+    <!-- PERIOD SUMMARY -->
+
+    <div class="period-summary">
+
+        <h2>
+            Odabrani period
+        </h2>
+
+        <p *ngIf="selectedPeriod === 'day'">
+            {{ selectedDate }}
+        </p>
+
+        <p *ngIf="selectedPeriod === 'week'">
+            Sedmica:
+            {{ getFilterDates()[0] }}
+            -
+            {{ getFilterDates()[6] }}
+        </p>
+
+        <p *ngIf="selectedPeriod === 'month'">
+            Mjesec:
+            {{ selectedDate.substring(0, 7) }}
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="statistics-grid">
+
+        <div class="stat-card">
+
+            <h2>Habit Tracker</h2>
+
+            <div class="stat-value">
+                {{ habitCompletion }}%
+            </div>
+
+            <p>
+                Završene navike
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Sleep Tracker</h2>
+
+            <div class="stat-value">
+                {{ periodSleepHours }}
+            </div>
+
+            <p>
+                Sati spavanja u periodu
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Study Planner</h2>
+
+            <div class="stat-value">
+                {{ periodStudyHours }}
+            </div>
+
+            <p>
+                Sati učenja u periodu
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Fitness Planner</h2>
+
+            <div class="stat-value">
+                {{ periodFitnessMinutes }}
+            </div>
+
+            <p>
+                Minuta aktivnosti u periodu
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Task Planner</h2>
+
+            <div class="stat-value">
+                {{ periodCompletedTasks }}
+            </div>
+
+            <p>
+                Završeni zadaci u periodu
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Meal Planner</h2>
+
+            <div class="stat-value">
+                {{ totalCalories }}
+            </div>
+
+            <p>
+                Ukupno kalorija
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Mood Tracker</h2>
+
+            <div class="stat-value">
+                {{ averageMood }}
+            </div>
+
+            <p>
+                Prosječno raspoloženje
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Calendar</h2>
+
+            <div class="stat-value">
+                {{ totalEvents }}
+            </div>
+
+            <p>
+                Ukupno događaja
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Finance</h2>
+
+            <div class="finance-values">
+
+                <p>
+                    <strong>Prihod:</strong>
+                    {{ totalIncome.toFixed(2) }}
+                </p>
+
+                <p>
+                    <strong>Trošak:</strong>
+                    {{ totalExpenses.toFixed(2) }}
+                </p>
+
+                <p>
+                    <strong>Balans:</strong>
+                    {{ balance.toFixed(2) }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Gratitude Journal</h2>
+
+            <div class="stat-value">
+                {{ totalGratitudeEntries }}
+            </div>
+
+            <p>
+                Zapisa zahvalnosti
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Daily Reflection</h2>
+
+            <div class="stat-value">
+                {{ averageReflection }}
+            </div>
+
+            <p>
+                Prosječna ocjena
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>Water Intake</h2>
+
+            <div class="stat-value">
+                {{ totalWater }}
+            </div>
+
+            <p>
+                Ukupno ml vode
+            </p>
+
+            <p>
+                Prosjek:
+                {{ averageWater }} ml
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- GRAFIKONI -->
+
+    <div class="charts-section">
+
+        <div class="section-title">
+
+            <h2>
+                Grafikoni produktivnosti
+            </h2>
+
+            <p>
+                Grafikoni prikazuju samo podatke iz odabranog perioda.
+            </p>
+
+        </div>
+
+
+        <div class="chart-card">
+
+            <h2>
+                Bar chart - Sati spavanja
+            </h2>
+
+            <p>
+                Pregled vremena spavanja prema odabranom periodu.
+            </p>
+
+            <div class="chart-wrapper">
+
+                <canvas id="sleepChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <div class="chart-card">
+
+            <h2>
+                Line chart - Vrijeme učenja
+            </h2>
+
+            <p>
+                Pregled vremena provedenog u učenju.
+            </p>
+
+            <div class="chart-wrapper">
+
+                <canvas id="studyChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <div class="chart-card">
+
+            <h2>
+                Pie chart - Status zadataka
+            </h2>
+
+            <p>
+                Odnos završenih, aktivnih i zadataka na čekanju.
+            </p>
+
+            <div class="pie-wrapper">
+
+                <canvas id="taskChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- POREĐENJE -->
+
+    <div class="comparison-section">
+
+        <div class="section-title">
+
+            <h2>
+                Poređenje napretka
+            </h2>
+
+            <p>
+                Odabrani period u odnosu na prethodni isti period.
+            </p>
+
+        </div>
+
+
+        <div class="comparison-grid">
+
+
+            <!-- SLEEP -->
+
+            <div class="comparison-card">
+
+                <h3>
+                    Spavanje
+                </h3>
+
+                <div class="comparison-values">
+
+                    <div>
+
+                        <span>
+                            Trenutno
+                        </span>
+
+                        <strong>
+                            {{ currentSleep }} h
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Prethodno
+                        </span>
+
+                        <strong>
+                            {{ comparisonSleep }} h
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="difference"
+                    [class.positive]="sleepDifference > 0"
+                    [class.negative]="sleepDifference < 0">
+
+                    <span
+                        *ngIf="sleepDifference > 0">
+
+                        ↑ Povećanje:
+                        {{ sleepChangePercent }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="sleepDifference < 0">
+
+                        ↓ Smanjenje:
+                        {{ getAbsoluteNumber(sleepChangePercent) }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="sleepDifference === 0">
+
+                        Bez promjene
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STUDY -->
+
+            <div class="comparison-card">
+
+                <h3>
+                    Učenje
+                </h3>
+
+                <div class="comparison-values">
+
+                    <div>
+
+                        <span>
+                            Trenutno
+                        </span>
+
+                        <strong>
+                            {{ currentStudy }} h
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Prethodno
+                        </span>
+
+                        <strong>
+                            {{ comparisonStudy }} h
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="difference"
+                    [class.positive]="studyDifference > 0"
+                    [class.negative]="studyDifference < 0">
+
+                    <span
+                        *ngIf="studyDifference > 0">
+
+                        ↑ Povećanje:
+                        {{ studyChangePercent }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="studyDifference < 0">
+
+                        ↓ Smanjenje:
+                        {{ getAbsoluteNumber(studyChangePercent) }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="studyDifference === 0">
+
+                        Bez promjene
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- FITNESS -->
+
+            <div class="comparison-card">
+
+                <h3>
+                    Fitness
+                </h3>
+
+                <div class="comparison-values">
+
+                    <div>
+
+                        <span>
+                            Trenutno
+                        </span>
+
+                        <strong>
+                            {{ currentFitness }} min
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Prethodno
+                        </span>
+
+                        <strong>
+                            {{ comparisonFitness }} min
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="difference"
+                    [class.positive]="fitnessDifference > 0"
+                    [class.negative]="fitnessDifference < 0">
+
+                    <span
+                        *ngIf="fitnessDifference > 0">
+
+                        ↑ Povećanje:
+                        {{ fitnessChangePercent }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="fitnessDifference < 0">
+
+                        ↓ Smanjenje:
+                        {{ getAbsoluteNumber(fitnessChangePercent) }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="fitnessDifference === 0">
+
+                        Bez promjene
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TASKS -->
+
+            <div class="comparison-card">
+
+                <h3>
+                    Završeni zadaci
+                </h3>
+
+                <div class="comparison-values">
+
+                    <div>
+
+                        <span>
+                            Trenutno
+                        </span>
+
+                        <strong>
+                            {{ currentCompletedTasks }}
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Prethodno
+                        </span>
+
+                        <strong>
+                            {{ comparisonCompletedTasks }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="difference"
+                    [class.positive]="taskDifference > 0"
+                    [class.negative]="taskDifference < 0">
+
+                    <span
+                        *ngIf="taskDifference > 0">
+
+                        ↑ Povećanje:
+                        {{ taskChangePercent }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="taskDifference < 0">
+
+                        ↓ Smanjenje:
+                        {{ getAbsoluteNumber(taskChangePercent) }}%
+
+                    </span>
+
+                    <span
+                        *ngIf="taskDifference === 0">
+
+                        Bez promjene
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- AI INSIGHTS -->
+
+    <div class="insights-section">
+
+        <div class="section-title">
+
+            <h2>
+                AI Insights
+            </h2>
+
+            <p>
+                Automatski prijedlozi zasnovani na vašim podacima.
+            </p>
+
+        </div>
+
+
+        <div class="insights-card">
+
+            <div
+                class="insight"
+                *ngFor="let insight of insights">
+
+                <span class="insight-icon">
+                    💡
+                </span>
+
+                <span>
+                    {{ insight }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

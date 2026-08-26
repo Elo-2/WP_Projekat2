@@ -1,0 +1,18 @@
+.theme-blue {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+.theme-blue .dashboard {
+    background-color: #ffffff;
+}
+
+.theme-blue .module-card {
+    border: 2px solid #2196f3;
+    background-color: #eaf4ff;
+}
+
+.theme-blue button {
+    background-color: #2196f3;
+    color: white;
+}
